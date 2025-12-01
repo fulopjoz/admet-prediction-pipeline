@@ -1,0 +1,77 @@
+data:
+  train_dataset: "openadmet/openadmet-expansionrx-challenge-train-data"
+  test_dataset: "openadmet/openadmet-expansionrx-challenge-test-data-blinded"
+  
+features:
+  morgan:
+    radius: 2
+    nBits: 2048
+    useFeatures: false
+  use_rdkit_descriptors: true
+  remove_low_variance: true
+  variance_threshold: 0.01
+  
+models:
+  xgboost:
+    n_estimators: 1000
+    learning_rate: 0.05
+    max_depth: 8
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_weight: 3
+    gamma: 0.1
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    random_state: 42
+    n_jobs: -1
+  
+  lightgbm:
+    n_estimators: 1000
+    learning_rate: 0.05
+    num_leaves: 31
+    max_depth: 8
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_samples: 20
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    random_state: 42
+    n_jobs: -1
+    verbose: -1
+    
+  random_forest:
+    n_estimators: 500
+    max_depth: 20
+    min_samples_split: 5
+    min_samples_leaf: 2
+    max_features: 0.3
+    random_state: 42
+    n_jobs: -1
+    
+training:
+  cv_folds: 5
+  random_seed: 42
+  use_gpu: false
+  optimize_hyperparameters: false
+  n_trials: 50
+  ensemble_weights:
+    xgboost: 0.5
+    lightgbm: 0.3
+    random_forest: 0.2
+  
+endpoints:
+  - LogD
+  - KSol
+  - HLM CLint
+  - MLM CLint
+  - Caco-2 Permeability Papp A>B
+  - Caco-2 Permeability Efflux
+  - MPPB
+  - MBPB
+  - MGMB
+
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  models: "models/saved_models"
+  submissions: "submissions"
