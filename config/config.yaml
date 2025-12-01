@@ -61,7 +61,7 @@ training:
   
 endpoints:
   - LogD
-  - KSol
+  - KSOL
   - HLM CLint
   - MLM CLint
   - Caco-2 Permeability Papp A>B

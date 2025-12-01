@@ -33,7 +33,7 @@ def download_and_load_data(config: Dict[str, Any]) -> Tuple[pd.DataFrame, pd.Dat
     # Load test data (blinded)
     test_dataset_name = config['data']['test_dataset']
     logger.info(f"Loading test data: {test_dataset_name}")
-    test_dataset = load_dataset(test_dataset_name, split='train')
+    test_dataset = load_dataset(test_dataset_name, split='test')
     test_df = test_dataset.to_pandas()
     
     logger.info(f"Training data shape: {train_df.shape}")
